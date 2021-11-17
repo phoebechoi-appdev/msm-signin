@@ -14,10 +14,12 @@
 #
 class Movie < ApplicationRecord
   
-  #another association accesser: ----
+  has_many(:characters, { :class_name => "Character", :foreign_key => "movie_id", :dependent => :destroy })
+  has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "movie_id", :dependent => :destroy })
+  belongs_to(:director, { :required => true, :class_name => "Director", :foreign_key => "director_id" })
 
-  #belongs_to(:direcor, { :required => true, :class_name => "Director", :foreign_key => "director_id"})
-  #has_many(:cast, { :through => characters, :source => :actor })
+  has_many(:cast, { :through => :characters, :source => :actor })
+  has_many(:users_bookmarks, { :through => :bookmarks, :source => :user })
 
   #write validations 
   validates(:title, { :presence => true })
