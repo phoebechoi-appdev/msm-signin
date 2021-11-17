@@ -46,7 +46,7 @@ Rails.application.routes.draw do
              
   #------------------------------
 
-  get("/", { :controller => "movies", :action => "index" })
+  get("/", { :controller => "home", :action => "index" })
 
   # Routes for the Character resource:
 
