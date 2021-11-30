@@ -11,10 +11,11 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
-  has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "user_id", :dependent => :destroy })
-  has_many(:bookmarked_movies, { :through => :bookmarks, :source => :movie })
-  
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
   has_secure_password
+
+  has_many :bookmarks
+
+  has_many :movies, :through => :bookmarks
 end

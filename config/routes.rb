@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get("/add_bookmark", { :controller => "movies", :action => "add_user_bookmark" })
+  
   # Routes for the Bookmark resource:
 
   # CREATE
@@ -18,6 +20,9 @@ Rails.application.routes.draw do
   get("/delete_bookmark/:path_id", { :controller => "bookmarks", :action => "destroy" })
 
   #------------------------------
+
+  get("/", { :controller => "movies", :action => "index" })
+
 
   # Routes for the User account:
 
@@ -45,8 +50,6 @@ Rails.application.routes.draw do
   get("/user_sign_out", { :controller => "user_authentication", :action => "destroy_cookies" })
              
   #------------------------------
-
-  get("/", { :controller => "home", :action => "index" })
 
   # Routes for the Character resource:
 
@@ -83,8 +86,6 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_movie/:path_id", { :controller => "movies", :action => "destroy" })
-
-  
 
   #------------------------------
 
@@ -125,7 +126,5 @@ Rails.application.routes.draw do
   get("/delete_actor/:path_id", { :controller => "actors", :action => "destroy" })
 
   #------------------------------
-
-  
 
 end

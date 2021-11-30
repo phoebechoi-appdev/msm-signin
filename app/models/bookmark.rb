@@ -9,6 +9,8 @@
 #  user_id    :integer
 #
 class Bookmark < ApplicationRecord
-  belongs_to(:movie, { :required => true, :class_name => "Movie", :foreign_key => "movie_id" })
-  belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
+  belongs_to :user, :required => true
+  belongs_to :movie, :required => true
+
+  # validates :movie_id, :presence => true
 end

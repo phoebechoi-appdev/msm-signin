@@ -13,18 +13,16 @@
 #  director_id :integer
 #
 class Movie < ApplicationRecord
+  belongs_to :director
   
-  has_many(:characters, { :class_name => "Character", :foreign_key => "movie_id", :dependent => :destroy })
-  has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "movie_id", :dependent => :destroy })
-  belongs_to(:director, { :required => true, :class_name => "Director", :foreign_key => "director_id" })
+  has_many :characters
 
-  has_many(:cast, { :through => :characters, :source => :actor })
-  has_many(:users_bookmarks, { :through => :bookmarks, :source => :user })
+  has_many :cast, :through => :characters, :source => :actor
 
-  #write validations 
+  has_many :bookmarks
+  
+  has_many :bookmarkers, :through => :bookmarks, :source => :user
+
   validates(:title, { :presence => true })
-  validates(:title, { :uniqueness => { :scope => [:year, :director_id] }})
-  
-
 
 end
